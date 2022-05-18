@@ -4,8 +4,8 @@ cd platform-train
 mvn clean package
 java -jar target/platform-train-0.1.0.jar
 
-cd docker
-cp ../7_engine_hub/api_platform/api-platform/target/api-platform-0.1.0.jar api_platform/
+cd docker-train
+cp ../7_engine_hub/training/platform-train/target/api-platform-0.1.0.jar api_platform/
 cp sources.list api_platform/
 
 sudo docker-compose build
@@ -19,15 +19,7 @@ sudo docker-compose logs -f
 
 http://49.232.6.131:8095
 
-cd 7_engine_hub/api_platform/api-platform-ui
-cnpm install
-npm run dev
-rm -rf node_modules
-cnpm install --save core-js
-cnpm install
-npm run dev
-rm -rf node_modules
-cnpm install core-js@2 --save
+cd 7_engine_hub/training/platform-train-ui
 cnpm install
 npm run dev
 

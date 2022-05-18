@@ -30,6 +30,10 @@ rm -rf node_modules
 cnpm install core-js@2 --save
 cnpm install
 npm run dev
+rm -rf node_modules
+cnpm install --save core-js
+cnpm install
+npm run dev
 
 https://git-lfs.github.com
 
