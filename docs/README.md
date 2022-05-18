@@ -19,6 +19,10 @@ sudo docker-compose logs -f
 
 http://49.232.6.131:8095
 
+cnpm install
+npm run dev
+npm install --save core-js/modules/es.error.cause.js
+
 https://git-lfs.github.com
 
 git lfs pull origin main
