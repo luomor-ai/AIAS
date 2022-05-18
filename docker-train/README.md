@@ -5,8 +5,7 @@ mvn clean package
 java -jar target/platform-train-0.1.0.jar
 
 cd docker-train
-cp ../7_engine_hub/training/platform-train/target/api-platform-0.1.0.jar api_platform/
-cp sources.list api_platform/
+cp ../7_engine_hub/training/platform-train/target/api-platform-0.1.0.jar platform-train/
 
 sudo docker-compose build
 
