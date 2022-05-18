@@ -23,7 +23,12 @@ cd 7_engine_hub/api_platform/api-platform-ui
 cnpm install
 npm run dev
 rm -rf node_modules
-npm install --save core-js
+cnpm install --save core-js
+npm run dev
+rm -rf node_modules
+cnpm install core-js@2 --save
+cnpm install
+npm run dev
 
 https://git-lfs.github.com
 
