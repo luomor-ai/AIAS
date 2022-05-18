@@ -8,6 +8,13 @@ cd docker
 cp ../7_engine_hub/api_platform/api-platform/target/api-platform-0.1.0.jar api_platform/
 cp sources.list api_platform/
 
+sudo docker-compose build
+
+sudo docker-compose up -d
+sudo docker-compose down
+
+sudo docker-compose logs -f
+
 strings /usr/lib64/libstdc++.so.6 | grep 'CXXAB'
 sudo yum install libstdc++
 
