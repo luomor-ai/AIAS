@@ -18,6 +18,7 @@ apt-get install gcc -y
 apt-get install g++
 strings /usr/lib/gcc/x86_64-linux-gnu/10/libstdc++.so |grep 'CXXAB'
 apt-get install net-tools
+/root/.djl.ai
 
 sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
 ```
