@@ -19,6 +19,7 @@ sudo docker-compose logs -f
 http://49.232.6.131:8095
 
 cd 7_engine_hub/training/platform-train-ui
+"core-js": "^3.22.5",
 cnpm install
 npm run dev
 
