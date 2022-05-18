@@ -17,6 +17,8 @@ sudo docker-compose down
 
 sudo docker-compose logs -f
 
+https://git-lfs.github.com
+
 strings /usr/lib64/libstdc++.so.6 | grep 'CXXAB'
 sudo yum install libstdc++
 
