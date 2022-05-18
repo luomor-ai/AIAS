@@ -17,6 +17,8 @@ sudo docker-compose down
 
 sudo docker-compose logs -f
 
+http://49.232.6.131:8095
+
 https://git-lfs.github.com
 
 git lfs pull origin main
