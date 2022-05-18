@@ -1,0 +1,12 @@
+version: '3'
+services:
+  platform-train:
+    build:
+      context: platform-train
+      dockerfile: Dockerfile
+    container_name: platform-train
+    ports:
+      - "8095:8089"
+    volumes:
+      - /etc/localtime:/etc/localtime
+    restart: always
