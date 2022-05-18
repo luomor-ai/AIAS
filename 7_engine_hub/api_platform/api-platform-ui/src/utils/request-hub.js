@@ -18,7 +18,7 @@ const service = axios.create({
  * @param {Object} params [请求时携带的参数]
  * @param {Boolean} json [true：json格式请求头；false：FormData格式请求头]
  */
-export function post(url, params = {}, json = false) {
+function post(url, params = {}, json = false) {
   // json格式请求头
   const headerJSON = {
     "Content-Type": "application/json"
