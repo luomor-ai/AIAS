@@ -5,7 +5,8 @@ mvn clean package
 java -jar target/api-platform-0.1.0.jar
 
 cd docker
-
+cp ../7_engine_hub/api_platform/api-platform/target/api-platform-0.1.0.jar api_platform/
+cp sources.list api_platform/
 
 strings /usr/lib64/libstdc++.so.6 | grep 'CXXAB'
 sudo yum install libstdc++
@@ -18,9 +19,9 @@ sudo docker exec -it 76768d8d698b bash
 ls /root/.djl.ai/
 apt-get update
 apt-get install gcc -y
-apt-get install g++
+apt-get install g++ -y
 strings /usr/lib/gcc/x86_64-linux-gnu/10/libstdc++.so |grep 'CXXAB'
-apt-get install net-tools
+apt-get install net-tools -y
 /root/.djl.ai
 
 sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
