@@ -10,7 +10,9 @@ cp sources.list api_platform/
 
 sudo docker-compose build
 
+sudo docker-compose up
 sudo docker-compose up -d
+sudo docker-compose stop
 sudo docker-compose down
 
 sudo docker-compose logs -f
