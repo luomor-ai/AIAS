@@ -19,9 +19,11 @@ sudo docker-compose logs -f
 
 http://49.232.6.131:8095
 
+cd 7_engine_hub/api_platform/api-platform-ui
 cnpm install
 npm run dev
-npm install --save core-js/modules/es.error.cause.js
+rm -rf node_modules
+npm install --save core-js
 
 https://git-lfs.github.com
 
