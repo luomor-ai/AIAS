@@ -19,6 +19,19 @@ sudo docker-compose logs -f
 
 https://git-lfs.github.com
 
+git lfs pull origin main
+git lfs pull
+# git pull 忽略lfs
+GIT_LFS_SKIP_SMUDGE=1 git pull
+set GIT_LFS_SKIP_SMUDGE=1  
+git clone SERVER-REPOSITORY
+git config --global filter.lfs.smudge "git-lfs smudge --skip -- %f"
+git config --global filter.lfs.process "git-lfs filter-process --skip"
+    
+git clone SERVER-REPOSITORY
+git config --global filter.lfs.smudge "git-lfs smudge -- %f"
+git config --global filter.lfs.process "git-lfs filter-process"
+
 strings /usr/lib64/libstdc++.so.6 | grep 'CXXAB'
 sudo yum install libstdc++
 
