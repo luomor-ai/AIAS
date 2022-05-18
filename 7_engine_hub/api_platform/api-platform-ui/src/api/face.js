@@ -34,7 +34,7 @@ export function compareForImageUrls(data) {
 export function compareForImageFiles(data) {
   return request({
     url: '/face/compareForImageFiles',
-    method: 'post',// PUT
+    method: 'post', // PUT
     data
   })
 }
