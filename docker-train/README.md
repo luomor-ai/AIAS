@@ -1,8 +1,8 @@
 ```shell
-cd 7_engine_hub/api_platform/
-cd api-platform
+cd 7_engine_hub/training/
+cd platform-train
 mvn clean package
-java -jar target/api-platform-0.1.0.jar
+java -jar target/platform-train-0.1.0.jar
 
 cd docker
 cp ../7_engine_hub/api_platform/api-platform/target/api-platform-0.1.0.jar api_platform/
@@ -51,7 +51,7 @@ sudo yum install libstdc++
 
 sudo docker run -ti --volume="$(pwd)":/app --rm openjdk:8-jre bash
 cd /app
-java -jar target/api-platform-0.1.0.jar
+java -jar target/platform-train-0.1.0.jar
 
 sudo docker exec -it 76768d8d698b bash
 ls /root/.djl.ai/
