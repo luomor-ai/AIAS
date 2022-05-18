@@ -1,8 +1,11 @@
 ```shell
 cd 7_engine_hub/api_platform/
 cd api-platform
-mvn package
+mvn clean package
 java -jar target/api-platform-0.1.0.jar
+
+cd docker
+
 
 strings /usr/lib64/libstdc++.so.6 | grep 'CXXAB'
 sudo yum install libstdc++
