@@ -15,4 +15,17 @@ sudo docker exec -it 76768d8d698b bash
 ls /root/.djl.ai/
 apt-get update
 apt-get install gcc -y
+apt-get install g++
+strings /usr/lib/gcc/x86_64-linux-gnu/10/libstdc++.so |grep 'CXXAB'
+
+sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
+```
+
+```xml
+<exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
 ```
