@@ -37,20 +37,13 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/ocr': {
-        target: 'https://ai.luomor.com',
+      '/api': {
+        target: process.env.VUE_APP_BASE_API,
         changeOrigin: true,
         pathRewrite: {
-          '^/ocr': 'ocr'
+          '^/api': 'api'
         }
       },
-      '/face': {
-          target: 'https://ai.luomor.com',
-          changeOrigin: true,
-          pathRewrite: {
-            '^/face': 'face'
-          }
-        },
       '/predict': {
         target: 'https://ai.luomor.com',
         changeOrigin: true,
