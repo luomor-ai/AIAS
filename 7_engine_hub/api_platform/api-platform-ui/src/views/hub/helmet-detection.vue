@@ -7,7 +7,7 @@
       <el-row>
         <el-col :span="9">
           <el-form-item>
-            <img :src="form.url" width="400px">
+            <img id="img1" :src="form.url" width="400px">
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -28,14 +28,16 @@
           size="small"
           element-loading-text="拼命加载中"
           @click="onSubmit"
-        >文字识别</el-button>
+        >安全帽检测</el-button>
       </el-form-item>
       <el-form-item>
         <el-divider />
       </el-form-item>
       <el-row>
         <el-col :span="9">
-          <div><img :src="form.base64Img" width="400px" class="avatar"></div>
+          <div>
+            <img :src="form.base64Img" width="400px" class="avatar">
+          </div>
           <el-form-item label="Local Image">
             <el-upload
               ref="upload"
@@ -81,7 +83,7 @@
 </template>
 
 <script>
-import { generalInfoForImageUrl } from '@/api/ocr'
+import { fireSmokeDetectPaddle } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
@@ -93,7 +95,8 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/OCR/images/freetxt.png',
+        // url: 'https://www.7otech.com/fire_000001.jpg',
+        url: require('@/assets/fire_000001.jpg'),
         result1: '',
         result2: '',
         base64Img: ''
@@ -103,7 +106,7 @@ export default {
   methods: {
     upload() {
       return window.g.Base_URL + '/ocr/generalInfoForImageFile'
-      // return `${process.env.VUE_APP_BASE_API}/inference/generalInfoForImageFile`
+      // return `${process.env.VUE_APP_BASE_API}/inference/fireSmokeDetectFile`
     },
     submitUpload() {
       this.fullscreenLoading = true
@@ -119,9 +122,17 @@ export default {
       console.log(file)
     },
     handleSuccess(file) {
+      console.log(file)
       this.form.base64Img = file.data.base64Img
-      this.form.result2 = file.data.result
-      this.fullscreenLoading = false
+      // this.form.result2 = file.results
+      const img1 = this.form.base64Img.substring(this.form.base64Img.indexOf(','))
+      const data = {
+        images: [img1]
+      }
+      fireSmokeDetectPaddle(JSON.stringify(data)).then(response => {
+        this.fullscreenLoading = false
+        this.form.result2 = response.results
+      })
     },
     beforeUpload(file) {
       const pass = file.type === 'image/jpg' || 'image/jpeg' || 'image/png'
@@ -130,11 +141,26 @@ export default {
       }
       return pass
     },
+    getBase64Image(img) {
+      var canvas = document.createElement('canvas')
+      canvas.width = img.width
+      canvas.height = img.height
+      var ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0, img.width, img.height)
+      var dataURL = canvas.toDataURL('image/png')
+      // return dataURL
+      return dataURL.replace('data:image/png;base64,', '')
+    },
     onSubmit() {
       this.fullscreenLoading = true
-      generalInfoForImageUrl(this.form).then(response => {
+      var img = document.getElementById('img1')
+      const img1 = this.getBase64Image(img)
+      const data = {
+        images: [img1]
+      }
+      fireSmokeDetectPaddle(data).then(response => {
         this.fullscreenLoading = false
-        this.form.result1 = response.data.result
+        this.form.result1 = response.results
       })
     }
   }
