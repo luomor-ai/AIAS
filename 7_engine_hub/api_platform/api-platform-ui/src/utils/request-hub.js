@@ -71,7 +71,16 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    return res
+    if (res.status !== '000') {
+      Message({
+        message: res.msg || 'Error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+      return Promise.reject(new Error(res.msg || 'Error'))
+    } else {
+      return res
+    }
   },
   error => {
     console.log('err' + error) // for debug

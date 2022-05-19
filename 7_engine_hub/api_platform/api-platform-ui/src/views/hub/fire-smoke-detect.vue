@@ -7,7 +7,7 @@
       <el-row>
         <el-col :span="9">
           <el-form-item>
-            <img :src="form.url" width="400px">
+            <img id="img1" :src="form.url" width="400px">
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -28,7 +28,7 @@
           size="small"
           element-loading-text="拼命加载中"
           @click="onSubmit"
-        >文字识别</el-button>
+        >烟火检测</el-button>
       </el-form-item>
       <el-form-item>
         <el-divider />
@@ -95,7 +95,8 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/OCR/images/freetxt.png',
+        // url: 'https://www.7otech.com/fire_000001.jpg',
+        url: require('@/assets/fire_000001.jpg'),
         result1: '',
         result2: '',
         base64Img: ''
@@ -123,14 +124,14 @@ export default {
     handleSuccess(file) {
       console.log(file)
       this.form.base64Img = file.data.base64Img
-      // this.form.result2 = file.data.result
-      const img1 = this.form.base64Img
+      // this.form.result2 = file.results
+      const img1 = this.form.base64Img.substring(this.form.base64Img.indexOf(','))
       const data = {
         images: [img1]
       }
-      fireSmokeDetectPaddle(data).then(response => {
+      fireSmokeDetectPaddle(JSON.stringify(data)).then(response => {
         this.fullscreenLoading = false
-        this.form.result2 = response.data.result
+        this.form.result2 = response.results
       })
     },
     beforeUpload(file) {
@@ -140,15 +141,26 @@ export default {
       }
       return pass
     },
+    getBase64Image(img) {
+      var canvas = document.createElement('canvas')
+      canvas.width = img.width
+      canvas.height = img.height
+      var ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0, img.width, img.height)
+      var dataURL = canvas.toDataURL('image/png')
+      // return dataURL
+      return dataURL.replace('data:image/png;base64,', '')
+    },
     onSubmit() {
       this.fullscreenLoading = true
-      const img1 = this.form.base64Img
+      var img = document.getElementById('img1')
+      const img1 = this.getBase64Image(img)
       const data = {
         images: [img1]
       }
       fireSmokeDetectPaddle(data).then(response => {
         this.fullscreenLoading = false
-        this.form.result1 = response.data.result
+        this.form.result1 = response.results
       })
     }
   }

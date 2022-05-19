@@ -44,6 +44,13 @@ module.exports = {
           '^/api': 'api'
         }
       },
+      '/predict': {
+        target: 'http://49.232.6.131:8866/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/predict': 'predict'
+        }
+      },
       '/auth': {
         target: process.env.VUE_APP_BASE_API,
         changeOrigin: true,

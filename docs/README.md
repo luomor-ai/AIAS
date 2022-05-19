@@ -69,6 +69,10 @@ apt-get install net-tools -y
 sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
 ```
 
+```
+axios post json
+```
+
 ```xml
 <exclusions>
                 <exclusion>
