@@ -84,6 +84,30 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/fire-smoke-detect',
+    component: Layout,
+    children: [
+      {
+        path: 'fire-smoke-detect',
+        component: () => import('@/views/hub/fire-smoke-detect'),
+        name: 'fire-smoke-detect',
+        meta: { title: '烟火检测', icon: 'el-icon-picture' }
+      }
+    ]
+  },
+  {
+    path: '/helmet-detection',
+    component: Layout,
+    children: [
+      {
+        path: 'helmet-detection',
+        component: () => import('@/views/hub/helmet-detection'),
+        name: 'helmet-detection',
+        meta: { title: '安全帽检测', icon: 'el-icon-picture' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
