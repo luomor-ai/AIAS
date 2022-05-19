@@ -49,6 +49,7 @@
               multiple
               name="imageFiles"
               class="upload"
+              :action="upload()"
               :on-preview="handlePreview"
               :on-change="handleChange"
               :on-remove="handleRemove"
