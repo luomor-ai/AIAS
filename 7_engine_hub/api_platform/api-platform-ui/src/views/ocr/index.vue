@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://www.luomor.com/assets/freetxt.png',
+        url: 'https://www.7otech.com/assets/freetxt.png',
         result1: '',
         result2: '',
         base64Img: ''

@@ -95,7 +95,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        // url: 'https://www.luomor.com/fire_000001.jpg',
+        // url: 'https://www.7otech.com/fire_000001.jpg',
         url: require('@/assets/fire_000001.jpg'),
         result1: '',
         result2: '',

@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://www.luomor.com/assets/beauty.jpeg',
+        url: 'https://www.7otech.com/assets/beauty.jpeg',
         result1: '',
         result2: '',
         base64Img: ''
