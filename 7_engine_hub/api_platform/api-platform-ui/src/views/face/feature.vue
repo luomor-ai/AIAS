@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     upload() {
-      return window.g.Base_URL + '/face/featureForImageFile'
+      return process.env.VUE_APP_OCR_API + '/face/featureForImageFile'
       // return `${process.env.VUE_APP_BASE_API}/inference/infoForImageFile`
     },
     submitUpload() {

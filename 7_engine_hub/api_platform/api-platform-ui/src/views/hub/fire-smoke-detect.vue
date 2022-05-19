@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     upload() {
-      return window.g.Base_URL + '/ocr/generalInfoForImageFile'
+      return process.env.VUE_APP_OCR_API + '/ocr/generalInfoForImageFile'
       // return `${process.env.VUE_APP_BASE_API}/inference/fireSmokeDetectFile`
     },
     submitUpload() {

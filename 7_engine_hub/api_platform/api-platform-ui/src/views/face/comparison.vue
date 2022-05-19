@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     upload() {
-      return window.g.Base_URL + '/face/compareForImageFiles'
+      return process.env.VUE_APP_OCR_API + '/face/compareForImageFiles'
       // return `${process.env.VUE_APP_BASE_API}/inference/infoForImageFile`
     },
     // 上传文件

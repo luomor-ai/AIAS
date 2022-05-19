@@ -4,7 +4,7 @@ import store from '@/store'
 // import { BaseURL } from '../../public/config'
 
 // create an axios instance
-const baseURL = window.g.Base_URL
+const baseURL = process.env.VUE_APP_OCR_API
 const service = axios.create({
   baseURL: baseURL
   // baseURL: process.env.VUE_APP_BASE_API // url = base url + request url
