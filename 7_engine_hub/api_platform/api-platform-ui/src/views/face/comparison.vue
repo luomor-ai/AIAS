@@ -103,8 +103,8 @@ export default {
       file: [],
       fileList: [], // upload多文件数组
       form: {
-        url1: window.location.protocol + '//' + window.location.host + require('@/assets/kana1.jpeg'),
-        url2: window.location.protocol + '//' + window.location.host + require('@/assets/kana2.jpeg'),
+        url1: 'https://www.7otech.com/assets/kana1.jpeg',
+        url2: 'https://www.7otech.com/assets/kana2.jpeg',
         result1: '',
         result2: '',
         base64Img: ''

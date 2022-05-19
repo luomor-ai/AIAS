@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: window.location.protocol + '//' + window.location.host + require('@/assets/kana1.jpeg'),
+        url: 'https://www.7otech.com/assets/kana1.jpeg',
         result1: '',
         result2: '',
         base64Img: ''
