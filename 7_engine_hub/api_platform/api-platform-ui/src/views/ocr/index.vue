@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: require('@/assets/freetxt.png'),
+        url: window.location.protocol + '//' + window.location.host + require('@/assets/freetxt.png'),
         result1: '',
         result2: '',
         base64Img: ''
