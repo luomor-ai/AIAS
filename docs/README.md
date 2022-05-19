@@ -35,6 +35,8 @@ cnpm install --save core-js
 cnpm install
 npm run dev
 
+npm run build:prod
+
 https://git-lfs.github.com
 
 git lfs pull origin main
