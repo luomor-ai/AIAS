@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'OCR UI',
+  title: 'AI',
 
   /**
    * @type {boolean} true | false
