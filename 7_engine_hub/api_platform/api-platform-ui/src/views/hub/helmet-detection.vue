@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { fireSmokeDetectPaddle } from '@/api/hub'
+import { helmetDetection } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
@@ -96,7 +96,7 @@ export default {
       fullscreenLoading: false,
       form: {
         // url: 'https://www.7otech.com/fire_000001.jpg',
-        url: require('@/assets/fire_000001.jpg'),
+        url: require('@/assets/hard_hat_workers1000.png'),
         result1: '',
         result2: '',
         base64Img: ''
@@ -129,7 +129,7 @@ export default {
       const data = {
         images: [img1]
       }
-      fireSmokeDetectPaddle(JSON.stringify(data)).then(response => {
+      helmetDetection(JSON.stringify(data)).then(response => {
         this.fullscreenLoading = false
         this.form.result2 = response.results
       })
@@ -158,7 +158,7 @@ export default {
       const data = {
         images: [img1]
       }
-      fireSmokeDetectPaddle(data).then(response => {
+      helmetDetection(data).then(response => {
         this.fullscreenLoading = false
         this.form.result1 = response.results
       })
