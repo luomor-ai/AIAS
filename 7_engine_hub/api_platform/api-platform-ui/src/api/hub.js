@@ -1,10 +1,10 @@
-import request from '@/utils/request'
+import request from '@/utils/request-hub'
 
 export function fireSmokeDetectPaddle(data) {
   return request({
     url: '/predict/fire-smoke-detect-paddle',
     method: 'post',
-    params: data
+    data
   })
 }
 
@@ -12,6 +12,6 @@ export function helmetDetection(data) {
   return request({
     url: '/predict/helmet-detection',
     method: 'post',
-    params: data
+    data
   })
 }

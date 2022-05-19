@@ -35,7 +35,9 @@
       </el-form-item>
       <el-row>
         <el-col :span="9">
-          <div><img :src="form.base64Img" width="400px" class="avatar"></div>
+          <div>
+            <img :src="form.base64Img" width="400px" class="avatar">
+          </div>
           <el-form-item label="Local Image">
             <el-upload
               ref="upload"
@@ -81,7 +83,7 @@
 </template>
 
 <script>
-import { generalInfoForImageUrl } from '@/api/ocr'
+import { fireSmokeDetectPaddle } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
@@ -103,7 +105,7 @@ export default {
   methods: {
     upload() {
       return window.g.Base_URL + '/ocr/generalInfoForImageFile'
-      // return `${process.env.VUE_APP_BASE_API}/inference/generalInfoForImageFile`
+      // return `${process.env.VUE_APP_BASE_API}/inference/fireSmokeDetectFile`
     },
     submitUpload() {
       this.fullscreenLoading = true
@@ -119,9 +121,17 @@ export default {
       console.log(file)
     },
     handleSuccess(file) {
+      console.log(file)
       this.form.base64Img = file.data.base64Img
-      this.form.result2 = file.data.result
-      this.fullscreenLoading = false
+      // this.form.result2 = file.data.result
+      const img1 = this.form.base64Img
+      const data = {
+        images: [img1]
+      }
+      fireSmokeDetectPaddle(data).then(response => {
+        this.fullscreenLoading = false
+        this.form.result2 = response.data.result
+      })
     },
     beforeUpload(file) {
       const pass = file.type === 'image/jpg' || 'image/jpeg' || 'image/png'
@@ -132,7 +142,11 @@ export default {
     },
     onSubmit() {
       this.fullscreenLoading = true
-      generalInfoForImageUrl(this.form).then(response => {
+      const img1 = this.form.base64Img
+      const data = {
+        images: [img1]
+      }
+      fireSmokeDetectPaddle(data).then(response => {
         this.fullscreenLoading = false
         this.form.result1 = response.data.result
       })

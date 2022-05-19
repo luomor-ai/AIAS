@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
-import store from '@/store'
+import { Message } from 'element-ui'
 // import { BaseURL } from '../../public/config'
 
 // create an axios instance
@@ -24,24 +23,24 @@ const service = axios.create({
 function post(url, params = {}, json = false) {
   // json格式请求头
   const headerJSON = {
-    "Content-Type": "application/json"
-  };
+    'Content-Type': 'application/json'
+  }
   // FormData格式请求头
   const headerFormData = {
-    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-  };
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  }
   return new Promise((resolve, reject) => {
     axios
-      .post(url, json ? JSON.stringify(params) : QS.stringify(params), {
+      .post(url, json ? JSON.stringify(params) : JSON.stringify(params), {
         headers: json ? headerJSON : headerFormData
       })
       .then(res => {
-        resolve(res.data);
+        resolve(res.data)
       })
       .catch(err => {
-        reject(err.data);
-      });
-  });
+        reject(err.data)
+      })
+  })
 }
 
 // request interceptor
