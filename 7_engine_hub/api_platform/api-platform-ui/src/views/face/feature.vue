@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/face_sdk/images/kana1.jpg',
+        url: require('@/assets/kana1.jpeg'),
         result1: '',
         result2: '',
         base64Img: ''

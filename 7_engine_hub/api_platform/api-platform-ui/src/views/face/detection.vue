@@ -93,7 +93,7 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        url: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/face_sdk/images/beauty.jpg',
+        url: require('@/assets/beauty.jpeg'),
         result1: '',
         result2: '',
         base64Img: ''

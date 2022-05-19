@@ -103,8 +103,8 @@ export default {
       file: [],
       fileList: [], // upload多文件数组
       form: {
-        url1: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/face_sdk/images/kana1.jpg',
-        url2: 'https://aias-home.oss-cn-beijing.aliyuncs.com/AIAS/face_sdk/images/kana2.jpg',
+        url1: require('@/assets/kana1.jpeg'),
+        url1: require('@/assets/kana2.jpeg'),
         result1: '',
         result2: '',
         base64Img: ''
