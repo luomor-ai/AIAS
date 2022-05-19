@@ -104,7 +104,7 @@ export default {
       fileList: [], // upload多文件数组
       form: {
         url1: require('@/assets/kana1.jpeg'),
-        url1: require('@/assets/kana2.jpeg'),
+        url2: require('@/assets/kana2.jpeg'),
         result1: '',
         result2: '',
         base64Img: ''
