@@ -3,7 +3,7 @@ import { Message } from 'element-ui'
 // import { BaseURL } from '../../public/config'
 
 // create an axios instance
-const baseURL = window.g.HUB_URL
+const baseURL = process.env.VUE_APP_BASE_API
 const service = axios.create({
   baseURL: baseURL,
   // baseURL: process.env.VUE_APP_BASE_API // url = base url + request url
