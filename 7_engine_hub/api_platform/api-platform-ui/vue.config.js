@@ -52,7 +52,7 @@ module.exports = {
         }
       },
       '/predict': {
-        target: 'http://49.232.6.131:8096/',
+        target: 'https://ai.luomor.com',
         changeOrigin: true,
         pathRewrite: {
           '^/predict': 'predict'

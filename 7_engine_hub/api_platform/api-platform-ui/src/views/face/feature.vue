@@ -102,8 +102,7 @@ export default {
   },
   methods: {
     upload() {
-      return process.env.VUE_APP_OCR_API + '/face/featureForImageFile'
-      // return `${process.env.VUE_APP_BASE_API}/inference/infoForImageFile`
+      return '/face/featureForImageFile'
     },
     submitUpload() {
       this.fullscreenLoading = true

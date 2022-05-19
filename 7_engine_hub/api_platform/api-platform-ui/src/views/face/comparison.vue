@@ -114,8 +114,7 @@ export default {
   },
   methods: {
     upload() {
-      return process.env.VUE_APP_OCR_API + '/face/compareForImageFiles'
-      // return `${process.env.VUE_APP_BASE_API}/inference/infoForImageFile`
+      return '/face/compareForImageFiles'
     },
     // 上传文件
     uploadFile(param) {
