@@ -108,6 +108,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/oral-detection',
+    component: Layout,
+    children: [
+      {
+        path: 'oral-detection',
+        component: () => import('@/views/hub/oral-detection'),
+        name: 'oral-detection',
+        meta: { title: '口咽检测', icon: 'el-icon-picture' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
