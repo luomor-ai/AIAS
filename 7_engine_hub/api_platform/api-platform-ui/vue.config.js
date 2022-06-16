@@ -38,21 +38,21 @@ module.exports = {
     },
     proxy: {
       '/ocr': {
-        target: 'https://ai.luomor.com',
+        target: 'https://ai.7otech.com',
         changeOrigin: true,
         pathRewrite: {
           '^/ocr': 'ocr'
         }
       },
       '/face': {
-        target: 'https://ai.luomor.com',
+        target: 'https://ai.7otech.com',
         changeOrigin: true,
         pathRewrite: {
           '^/face': 'face'
         }
       },
       '/predict': {
-        target: 'https://ai.luomor.com',
+        target: 'https://ai.7otech.com',
         changeOrigin: true,
         pathRewrite: {
           '^/predict': 'predict'

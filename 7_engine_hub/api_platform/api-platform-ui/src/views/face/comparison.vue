@@ -104,8 +104,8 @@ export default {
       file: [],
       fileList: [], // upload多文件数组
       form: {
-        url1: 'https://www.luomor.com/assets/kana1.jpeg',
-        url2: 'https://www.luomor.com/assets/kana2.jpeg',
+        url1: 'https://www.7otech.com/assets/kana1.jpeg',
+        url2: 'https://www.7otech.com/assets/kana2.jpeg',
         result1: '',
         result2: '',
         base64Img: ''

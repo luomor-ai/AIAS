@@ -28,7 +28,7 @@
           size="small"
           element-loading-text="拼命加载中"
           @click="onSubmit"
-        >烟火检测</el-button>
+        >口咽检测</el-button>
       </el-form-item>
       <el-form-item>
         <el-divider />
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { fireSmokeDetectPaddle } from '@/api/hub'
+import { oralDetection } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
@@ -96,7 +96,7 @@ export default {
       fullscreenLoading: false,
       form: {
         // url: 'https://www.7otech.com/fire_000001.jpg',
-        url: require('@/assets/fire_000001.jpg'),
+        url: require('@/assets/00000.jpg'),
         result1: '',
         result2: '',
         base64Img: ''
@@ -128,7 +128,7 @@ export default {
       const data = {
         images: [img1]
       }
-      fireSmokeDetectPaddle(JSON.stringify(data)).then(response => {
+      oralDetection(JSON.stringify(data)).then(response => {
         this.fullscreenLoading = false
         this.form.result2 = response.results
       })
@@ -157,7 +157,7 @@ export default {
       const data = {
         images: [img1]
       }
-      fireSmokeDetectPaddle(data).then(response => {
+      oralDetection(data).then(response => {
         this.fullscreenLoading = false
         this.form.result1 = response.results
       })

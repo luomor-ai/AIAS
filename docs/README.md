@@ -75,6 +75,9 @@ sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
 
 ```
 axios post json
+
+https://paddlejs.bj.bcebos.com/models/fuse/ocr/ch_PP-OCRv2_det_fuse_activation/chunk_1.dat
+https://paddlejs.bj.bcebos.com/models/fuse/ocr/ch_PP-OCRv2_det_fuse_activation/chunk_2.dat
 ```
 
 ```xml
