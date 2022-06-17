@@ -116,7 +116,8 @@ export const constantRoutes = [
         path: 'oral-detection',
         component: () => import('@/views/hub/oral-detection'),
         name: 'oral-detection',
-        meta: { title: '口咽检测', icon: 'el-icon-picture' }
+        meta: { title: '口咽检测', icon: 'el-icon-picture' },
+        hidden: true
       }
     ]
   },
