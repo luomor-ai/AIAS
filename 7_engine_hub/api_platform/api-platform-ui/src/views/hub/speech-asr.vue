@@ -41,7 +41,7 @@
           <el-form-item label="Local Wav">
             <el-upload
               ref="upload"
-              name="imageFile"
+              name="audioFile"
               class="upload"
               :action="upload()"
               :on-preview="handlePreview"
