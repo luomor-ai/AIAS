@@ -16,3 +16,11 @@ export function helmetDetection(data) {
   })
 }
 
+export function oralDetection(data) {
+  return request({
+    url: '/predict1/oral-detection',
+    method: 'post',
+    data
+  })
+}
+
