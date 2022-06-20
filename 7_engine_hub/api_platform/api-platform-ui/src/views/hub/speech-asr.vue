@@ -36,7 +36,7 @@
       <el-row>
         <el-col :span="9">
           <div>
-            <audio :src="form.base64Img" controls="controls" />
+            <audio :src="form.base64Audio" controls="controls" />
           </div>
           <el-form-item label="Local Wav">
             <el-upload
@@ -100,13 +100,13 @@ export default {
         url: require('@/assets/zh.wav'),
         result1: '',
         result2: '',
-        base64Img: ''
+        base64Audio: ''
       }
     }
   },
   methods: {
     upload() {
-      return '/ocr/generalInfoForImageFile'
+      return '/ocr/uploadAudio'
     },
     submitUpload() {
       this.fullscreenLoading = true
@@ -123,9 +123,9 @@ export default {
     },
     handleSuccess(file) {
       console.log(file)
-      this.form.base64Img = file.data.base64Img
+      this.form.base64Audio = file.data.base64Audio
       // this.form.result2 = file.results
-      const audio1 = this.form.base64Img.substring(this.form.base64Img.indexOf(','))
+      const audio1 = this.form.base64Audio.substring(this.form.base64Audio.indexOf(','))
       const data = {
         audio: audio1,
         audio_format: "wav",

@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     upload() {
-      return '/ocr/generalInfoForImageFile'
+      return '/ocr/uploadImage'
     },
     submitUpload() {
       this.fullscreenLoading = true
