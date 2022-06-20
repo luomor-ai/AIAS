@@ -36,71 +36,25 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        // url: 'https://www.7otech.com/fire_000001.jpg',
-        url: require('@/assets/00000.jpg'),
-        result1: '',
-        result2: '',
-        base64Img: ''
+        text: '您好，欢迎使用语音合成服务。',
+        base64Audio: ''
       }
     }
   },
   methods: {
-    upload() {
-      return '/ocr/uploadImage'
-    },
-    submitUpload() {
-      this.fullscreenLoading = true
-      this.$refs.upload.submit()
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
-    handleChange(file) {
-      console.log(file)
-    },
-    handlePreview(file) {
-      console.log(file)
-    },
-    handleSuccess(file) {
-      console.log(file)
-      this.form.base64Img = file.data.base64Img
-      // this.form.result2 = file.results
-      const img1 = this.form.base64Img.substring(this.form.base64Img.indexOf(','))
-      const data = {
-        images: [img1]
-      }
-      oralDetection(JSON.stringify(data)).then(response => {
-        this.fullscreenLoading = false
-        this.form.result2 = response.results
-      })
-    },
-    beforeUpload(file) {
-      const pass = file.type === 'image/jpg' || 'image/jpeg' || 'image/png'
-      if (!pass) {
-        this.$message.error('Image format should be JPG(JPEG) or PNG!')
-      }
-      return pass
-    },
-    getBase64Image(img) {
-      var canvas = document.createElement('canvas')
-      canvas.width = img.width
-      canvas.height = img.height
-      var ctx = canvas.getContext('2d')
-      ctx.drawImage(img, 0, 0, img.width, img.height)
-      var dataURL = canvas.toDataURL('image/png')
-      // return dataURL
-      return dataURL.replace('data:image/png;base64,', '')
-    },
     onSubmit() {
       this.fullscreenLoading = true
-      var img = document.getElementById('img1')
-      const img1 = this.getBase64Image(img)
       const data = {
-        images: [img1]
-      }
-      oralDetection(data).then(response => {
+         "text": this.form.text,
+         "spk_id": 0,
+         "speed": 1.0,
+         "volume": 1.0,
+         "sample_rate": 0,
+         "save_path": "./tts.wav"
+     }
+      speechTts(data).then(response => {
         this.fullscreenLoading = false
-        this.form.result1 = response.results
+        this.form.base64Audio = response.result.audio
       })
     }
   }
