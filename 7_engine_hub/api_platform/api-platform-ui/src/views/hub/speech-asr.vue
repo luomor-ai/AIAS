@@ -7,7 +7,7 @@
       <el-row>
         <el-col :span="9">
           <el-form-item>
-            <audio id="audio1" :src="form.url" />
+            <audio id="audio1" :src="form.url" controls="controls" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -36,7 +36,7 @@
       <el-row>
         <el-col :span="9">
           <div>
-            <audio :src="form.base64Img" class="avatar" />
+            <audio :src="form.base64Img" controls="controls" />
           </div>
           <el-form-item label="Local Wav">
             <el-upload
