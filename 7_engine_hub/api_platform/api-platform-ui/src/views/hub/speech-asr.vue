@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
     <el-form ref="form" :model="form" label-width="120">
-      <el-form-item label="Online Image">
+      <el-form-item label="Online Wav">
         <el-input v-model="form.url" />
       </el-form-item>
       <el-row>
         <el-col :span="9">
           <el-form-item>
-            <img id="img1" :src="form.url" width="400px">
+            <audio id="audio1" :src="form.url" controls="controls" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -28,7 +28,7 @@
           size="small"
           element-loading-text="拼命加载中"
           @click="onSubmit"
-        >安全帽检测</el-button>
+        >语音识别</el-button>
       </el-form-item>
       <el-form-item>
         <el-divider />
@@ -36,12 +36,12 @@
       <el-row>
         <el-col :span="9">
           <div>
-            <img :src="form.base64Img" width="400px" class="avatar">
+            <audio :src="form.base64Audio" controls="controls" />
           </div>
-          <el-form-item label="Local Image">
+          <el-form-item label="Local Wav">
             <el-upload
               ref="upload"
-              name="imageFile"
+              name="audioFile"
               class="upload"
               :action="upload()"
               :on-preview="handlePreview"
@@ -50,6 +50,7 @@
               :on-success="handleSuccess"
               :before-upload="beforeUpload"
               ::limit="1"
+              accept=".wav"
               :show-file-list="false"
               :auto-upload="false"
             >
@@ -62,7 +63,7 @@
                 element-loading-text="拼命加载中"
                 @click="submitUpload"
               >上传</el-button>
-              <div slot="tip" class="el-upload__tip">Image format: JPG(JPEG), PNG</div>
+              <div slot="tip" class="el-upload__tip">Audio format: Wav</div>
             </el-upload>
           </el-form-item>
         </el-col>
@@ -83,11 +84,11 @@
 </template>
 
 <script>
-import { helmetDetection } from '@/api/hub'
+import { speechAsr } from '@/api/speech'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
-  name: 'HelmetDetection',
+  name: 'SpeechAsr',
   components: {
     JsonViewer
   },
@@ -95,17 +96,17 @@ export default {
     return {
       fullscreenLoading: false,
       form: {
-        // url: 'https://www.luomor.com/fire_000001.jpg',
-        url: require('@/assets/hard_hat_workers1000.png'),
+        // url: 'https://www.7otech.com/fire_000001.jpg',
+        url: require('@/assets/zh.wav'),
         result1: '',
         result2: '',
-        base64Img: ''
+        base64Audio: ''
       }
     }
   },
   methods: {
     upload() {
-      return '/ocr/uploadImage'
+      return '/ocr/uploadAudio'
     },
     submitUpload() {
       this.fullscreenLoading = true
@@ -122,21 +123,25 @@ export default {
     },
     handleSuccess(file) {
       console.log(file)
-      this.form.base64Img = file.data.base64Img
+      this.form.base64Audio = file.data.base64Audio
       // this.form.result2 = file.results
-      const img1 = this.form.base64Img.substring(this.form.base64Img.indexOf(','))
+      const audio1 = this.form.base64Audio.substring(this.form.base64Audio.indexOf(','))
       const data = {
-        images: [img1]
+        audio: audio1,
+        audio_format: "wav",
+        sample_rate: 16000,
+        lang: "zh_cn",
+        punc: 0,
       }
-      helmetDetection(JSON.stringify(data)).then(response => {
+      speechAsr(JSON.stringify(data)).then(response => {
         this.fullscreenLoading = false
-        this.form.result2 = response.results
+        this.form.result2 = response.result
       })
     },
     beforeUpload(file) {
-      const pass = file.type === 'image/jpg' || 'image/jpeg' || 'image/png'
+      const pass = file.type === 'audio/wav'
       if (!pass) {
-        this.$message.error('Image format should be JPG(JPEG) or PNG!')
+        this.$message.error('Audio format should be Wav!')
       }
       return pass
     },
@@ -150,17 +155,41 @@ export default {
       // return dataURL
       return dataURL.replace('data:image/png;base64,', '')
     },
+    bufferToBase64 (buffer) {
+        var bytes = new Uint8Array(buffer);
+        var len = buffer.byteLength;
+        var binary = "";
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    },
+    loadSoundFile(url) {
+      var that = this
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'arraybuffer';
+      xhr.onload = function (e) {
+          var base64Audio = that.bufferToBase64(this.response); // this.response is an ArrayBuffer.
+
+          const data = {
+            audio: base64Audio,
+            audio_format: "wav",
+            sample_rate: 16000,
+            lang: "zh_cn",
+            punc: 0,
+          }
+          speechAsr(data).then(response => {
+            that.fullscreenLoading = false
+            that.form.result1 = response.result
+          })
+      };
+      xhr.send();
+    },
     onSubmit() {
       this.fullscreenLoading = true
-      var img = document.getElementById('img1')
-      const img1 = this.getBase64Image(img)
-      const data = {
-        images: [img1]
-      }
-      helmetDetection(data).then(response => {
-        this.fullscreenLoading = false
-        this.form.result1 = response.results
-      })
+      var audio = document.getElementById('audio1')
+      this.loadSoundFile(audio.src)
     }
   }
 }

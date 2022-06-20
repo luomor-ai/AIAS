@@ -87,7 +87,7 @@ import { oralDetection } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
-  name: 'InferenceDetail',
+  name: 'OralDetection',
   components: {
     JsonViewer
   },
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     upload() {
-      return '/ocr/generalInfoForImageFile'
+      return '/ocr/uploadImage'
     },
     submitUpload() {
       this.fullscreenLoading = true

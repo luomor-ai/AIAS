@@ -23,3 +23,4 @@ export function oralDetection(data) {
     data
   })
 }
+

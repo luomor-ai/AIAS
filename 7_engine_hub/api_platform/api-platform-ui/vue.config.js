@@ -58,6 +58,13 @@ module.exports = {
           '^/predict': 'predict'
         }
       },
+      '/speech': {
+        target: 'https://ai.7otech.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/speech': 'speech'
+        }
+      },
       '/auth': {
         target: process.env.VUE_APP_BASE_API,
         changeOrigin: true,

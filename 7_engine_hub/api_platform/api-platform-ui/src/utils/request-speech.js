@@ -1,16 +1,47 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
-import store from '@/store'
+import { Message } from 'element-ui'
 // import { BaseURL } from '../../public/config'
 
 // create an axios instance
-const baseURL = process.env.VUE_APP_OCR_API
+const baseURL = process.env.VUE_APP_BASE_API
 const service = axios.create({
-  baseURL: baseURL
+  baseURL: baseURL,
   // baseURL: process.env.VUE_APP_BASE_API // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   // timeout: 5000 // request timeout
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
+
+/**
+ * post方法，对应post请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ * @param {Boolean} json [true：json格式请求头；false：FormData格式请求头]
+ */
+function post(url, params = {}, json = false) {
+  // json格式请求头
+  const headerJSON = {
+    'Content-Type': 'application/json'
+  }
+  // FormData格式请求头
+  const headerFormData = {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  }
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, json ? JSON.stringify(params) : JSON.stringify(params), {
+        headers: json ? headerJSON : headerFormData
+      })
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
 
 // request interceptor
 service.interceptors.request.use(
@@ -40,28 +71,13 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 0) {
+    if (res.code !== 200) {
       Message({
-        message: res.message || 'Error',
+        message: res.message.description || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(res.message || 'Error')
+      return Promise.reject(res.message.description || 'Error')
     } else {
       return res
     }

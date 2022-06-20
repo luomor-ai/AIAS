@@ -116,7 +116,32 @@ export const constantRoutes = [
         path: 'oral-detection',
         component: () => import('@/views/hub/oral-detection'),
         name: 'oral-detection',
-        meta: { title: '口咽检测', icon: 'el-icon-picture' }
+        meta: { title: '口咽检测', icon: 'el-icon-picture' },
+        // hidden: true
+      }
+    ]
+  },
+  {
+    path: '/speech-asr',
+    component: Layout,
+    children: [
+      {
+        path: 'speech-asr',
+        component: () => import('@/views/hub/speech-asr'),
+        name: 'speech-asr',
+        meta: { title: '语音识别', icon: 'el-icon-picture' },
+      }
+    ]
+  },
+  {
+    path: '/speech-tts',
+    component: Layout,
+    children: [
+      {
+        path: 'speech-tts',
+        component: () => import('@/views/hub/speech-tts'),
+        name: 'speech-tts',
+        meta: { title: '语音合成', icon: 'el-icon-picture' },
       }
     ]
   },
