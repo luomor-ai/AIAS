@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { speechAsr } from '@/api/hub'
+import { speechAsr } from '@/api/speech'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
@@ -181,7 +181,7 @@ export default {
           }
           speechAsr(data).then(response => {
             that.fullscreenLoading = false
-            that.form.result1 = response.results
+            that.form.result1 = response.result
           })
       };
       xhr.send();
