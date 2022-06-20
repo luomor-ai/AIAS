@@ -135,7 +135,7 @@ export default {
       }
       speechAsr(JSON.stringify(data)).then(response => {
         this.fullscreenLoading = false
-        this.form.result2 = response.results
+        this.form.result2 = response.result
       })
     },
     beforeUpload(file) {
