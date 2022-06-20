@@ -67,4 +67,32 @@ public class OcrController {
             }
         }
     }
+
+    @ApiOperation(value = "通用文字识别-上传图片")
+    @PostMapping("/uploadImage")
+    public ResultBean uploadImage(@RequestParam(value = "imageFile") MultipartFile imageFile) {
+        try {
+            String base64Img = Base64.encodeBase64String(imageFile.getBytes());
+
+            return ResultBean.success().add("base64Img", "data:image/jpeg;base64," + base64Img);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return ResultBean.failure().add("errors", e.getMessage());
+        }
+    }
+
+    @ApiOperation(value = "通用文字识别-上传音频")
+    @PostMapping("/uploadAudio")
+    public ResultBean uploadAudio(@RequestParam(value = "audioFile") MultipartFile audioFile) {
+        try {
+            String base64Audio = Base64.encodeBase64String(audioFile.getBytes());
+
+            return ResultBean.success().add("base64Audio", "data:audio/wav;base64," + base64Audio);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+            return ResultBean.failure().add("errors", e.getMessage());
+        }
+    }
 }
