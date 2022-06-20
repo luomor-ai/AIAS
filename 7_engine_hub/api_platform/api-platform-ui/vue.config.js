@@ -59,7 +59,7 @@ module.exports = {
         }
       },
       '/speech': {
-        target: 'https://ai.7otech.com',
+        target: 'https://ai.luomor.com',
         changeOrigin: true,
         pathRewrite: {
           '^/speech': 'speech'
