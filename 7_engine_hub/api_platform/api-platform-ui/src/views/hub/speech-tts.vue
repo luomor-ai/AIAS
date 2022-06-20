@@ -30,7 +30,7 @@ import { speechTts } from '@/api/speech'
 export default {
   name: 'SpeechTts',
   components: {
-    JsonViewer
+
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
      }
       speechTts(data).then(response => {
         this.fullscreenLoading = false
-        this.form.base64Audio = response.result.audio
+        this.form.base64Audio = 'data:audio/wav;base64,' + response.result.audio
       })
     }
   }
