@@ -87,7 +87,7 @@ import { oralDetection } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
-  name: 'InferenceDetail',
+  name: 'OralDetection',
   components: {
     JsonViewer
   },

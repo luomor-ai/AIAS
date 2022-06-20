@@ -87,7 +87,7 @@ import { fireSmokeDetectPaddle } from '@/api/hub'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
-  name: 'InferenceDetail',
+  name: 'FireSmokeDetect',
   components: {
     JsonViewer
   },

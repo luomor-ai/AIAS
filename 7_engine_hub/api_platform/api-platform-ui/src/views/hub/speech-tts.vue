@@ -1,23 +1,13 @@
 <template>
   <div class="app-container">
     <el-form ref="form" :model="form" label-width="120">
-      <el-form-item label="Online Image">
-        <el-input v-model="form.url" />
+      <el-form-item label="Online Wav">
+        <el-input type="textarea" v-model="form.text" />
       </el-form-item>
       <el-row>
         <el-col :span="9">
           <el-form-item>
-            <img id="img1" :src="form.url" width="400px">
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="">
-            <json-viewer
-              :value="form.result1"
-              :expand-depth="3"
-              copyable
-              width="400px"
-            />
+            <audio id="audio1" :src="form.base64Audio" controls="controls" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -28,66 +18,17 @@
           size="small"
           element-loading-text="拼命加载中"
           @click="onSubmit"
-        >口咽检测</el-button>
+        >语音合成</el-button>
       </el-form-item>
-      <el-form-item>
-        <el-divider />
-      </el-form-item>
-      <el-row>
-        <el-col :span="9">
-          <div>
-            <img :src="form.base64Img" width="400px" class="avatar">
-          </div>
-          <el-form-item label="Local Image">
-            <el-upload
-              ref="upload"
-              name="imageFile"
-              class="upload"
-              :action="upload()"
-              :on-preview="handlePreview"
-              :on-change="handleChange"
-              :on-remove="handleRemove"
-              :on-success="handleSuccess"
-              :before-upload="beforeUpload"
-              ::limit="1"
-              :show-file-list="false"
-              :auto-upload="false"
-            >
-              <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-              <el-button
-                v-loading.fullscreen.lock="fullscreenLoading"
-                style="margin-left: 10px;"
-                type="success"
-                size="small"
-                element-loading-text="拼命加载中"
-                @click="submitUpload"
-              >上传</el-button>
-              <div slot="tip" class="el-upload__tip">Image format: JPG(JPEG), PNG</div>
-            </el-upload>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="">
-            <json-viewer
-              :value="form.result2"
-              :expand-depth="3"
-              copyable
-              width="500px"
-            />
-          </el-form-item>
-        </el-col>
-      </el-row>
-
     </el-form>
   </div>
 </template>
 
 <script>
-import { oralDetection } from '@/api/hub'
-import JsonViewer from 'vue-json-viewer'
+import { speechTts } from '@/api/speech'
 
 export default {
-  name: 'InferenceDetail',
+  name: 'SpeechTts',
   components: {
     JsonViewer
   },

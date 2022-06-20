@@ -88,7 +88,7 @@ import { speechAsr } from '@/api/speech'
 import JsonViewer from 'vue-json-viewer'
 
 export default {
-  name: 'InferenceDetail',
+  name: 'SpeechAsr',
   components: {
     JsonViewer
   },
