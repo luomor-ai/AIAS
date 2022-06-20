@@ -16,10 +16,19 @@ export function helmetDetection(data) {
   })
 }
 
-export function oralDetection(data) {
+export function speechAsr(data) {
   return request({
-    url: '/predict1/oral-detection',
+    url: '/speech/asr',
     method: 'post',
     data
   })
 }
+
+export function speechTts(data) {
+  return request({
+    url: '/speech/tts',
+    method: 'post',
+    data
+  })
+}
+
