@@ -79,11 +79,13 @@ export default {
     this.form.time = '按住说话（' + this.num + '秒）'
     // 获取语音二进制文件
     let blob = this.recorder.getBlob()
-    console.log(blob);
+    console.log(blob.arrayBuffer());
     // 将获取的二进制对象转为二进制文件流
-    let files = new File([blob], 'test.mp3', {type: 'audio/mp3', lastModified: Date.now()})
+    let file = new File([blob], 'test.wav', {type: 'audio/wav', lastModified: Date.now()})
+    console.log(file)
+    this.form.audioUrl = file
     let fd = new FormData()
-    fd.append('file', files)
+    fd.append('file', file)
     // 这里是通过上传语音文件的接口，获取接口返回的路径作为语音路径
     console.log(fd)
     // this.uploadFile(fd)

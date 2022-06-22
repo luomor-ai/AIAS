@@ -94,7 +94,7 @@ let HZRecorder = function (stream, config) {
      data.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true)
     }
    }
-   return new Blob([data], { type: 'audio/mp3' })
+   return new Blob([data], { type: 'audio/wav' })
   }
  }
  // 开始录音
