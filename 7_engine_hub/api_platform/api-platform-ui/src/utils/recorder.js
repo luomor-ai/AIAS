@@ -15,7 +15,7 @@ let HZRecorder = function (stream, config) {
   inputSampleRate: context.sampleRate, // 输入采样率
   inputSampleBits: 16, // 输入采样数位 8, 16
   outputSampleRate: config.sampleRate, // 输出采样率
-  oututSampleBits: config.sampleBits, // 输出采样数位 8, 16
+  outputSampleBits: config.sampleBits, // 输出采样数位 8, 16
   input: function (data) {
    this.buffer.push(new Float32Array(data))
    this.size += data.length
@@ -42,7 +42,7 @@ let HZRecorder = function (stream, config) {
   },
   encodeWAV: function () {
    let sampleRate = Math.min(this.inputSampleRate, this.outputSampleRate)
-   let sampleBits = Math.min(this.inputSampleBits, this.oututSampleBits)
+   let sampleBits = Math.min(this.inputSampleBits, this.outputSampleBits)
    let bytes = this.compress()
    let dataLength = bytes.length * (sampleBits / 8)
    let buffer = new ArrayBuffer(44 + dataLength)
