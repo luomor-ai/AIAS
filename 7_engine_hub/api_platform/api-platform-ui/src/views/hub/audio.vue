@@ -6,6 +6,9 @@
         @mousedown.native="mouseStart"
         @mouseup.native="mouseEnd"
         >{{ form.time }}</el-button>
+    <el-divider />
+    <span>{{ form.time }}</span>
+    <el-divider />
     <audio
         v-if="form.audioUrl"
         :src="form.audioUrl"
