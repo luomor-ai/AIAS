@@ -145,6 +145,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+  path: '/audio',
+  component: Layout,
+  children: [
+    {
+      path: 'audio',
+      component: () => import('@/views/hub/audio'),
+      name: 'audio',
+      meta: { title: '录音', icon: 'el-icon-picture' },
+    }
+  ]
+},
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
