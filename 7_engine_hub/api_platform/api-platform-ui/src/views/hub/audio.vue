@@ -5,7 +5,7 @@
     <input type="button" class="btn-record-voice" @mousedown.prevent="mouseStart" @mouseup.prevent="mouseEnd" v-model="form.time"/>
     <audio v-if="form.audioUrl" :src="form.audioUrl" controls="controls" class="content-audio" >语音</audio>
    </el-form-item>
-  <el-form>
+  </el-form>
  </div>
 </template>
 <script>
