@@ -79,6 +79,35 @@
         </el-col>
       </el-row>
 
+      <el-form-item>
+        <el-divider />
+      </el-form-item>
+
+      <el-row>
+        <el-col :span="9">
+            <el-button type="primary"
+                @mousedown.native="mouseStart"
+                @mouseup.native="mouseEnd"
+                >{{ form.time }}</el-button>
+            <p />
+            <span>{{ form.time }}</span>
+            <p />
+            <audio
+                v-if="form.audioUrl"
+                :src="form.audioUrl"
+                controls="controls"></audio>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="">
+            <json-viewer
+              :value="form.result3"
+              :expand-depth="3"
+              copyable
+              width="500px"
+            />
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
   </div>
 </template>
@@ -100,7 +129,10 @@ export default {
         url: require('@/assets/zh.wav'),
         result1: '',
         result2: '',
-        base64Audio: ''
+        base64Audio: '',
+        time: '按住说话(60秒)',
+        audioUrl: '',
+        result3: ''
       }
     }
   },
