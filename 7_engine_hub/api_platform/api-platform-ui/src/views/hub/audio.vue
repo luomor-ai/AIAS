@@ -2,8 +2,14 @@
  <div class="wrap">
   <el-form v-model="form">
    <el-form-item>
-    <input type="button" class="btn-record-voice" @mousedown.prevent="mouseStart" @mouseup.prevent="mouseEnd" v-model="form.time"/>
-    <audio v-if="form.audioUrl" :src="form.audioUrl" controls="controls" class="content-audio" >语音</audio>
+    <el-button type="primary"
+        @mousedown.native="mouseStart"
+        @mouseup.native="mouseEnd"
+        >{{ form.time }}</el-button>
+    <audio
+        v-if="form.audioUrl"
+        :src="form.audioUrl"
+        controls="controls"></audio>
    </el-form-item>
   </el-form>
  </div>
@@ -54,7 +60,7 @@ export default {
         this.clearTimer()
        } else {
         this.num--
-        this.time = '松开结束（' + this.num + '秒）'
+        this.form.time = '松开结束（' + this.num + '秒）'
         this.recorder.start()
        }
       }, 1000)
@@ -70,16 +76,17 @@ export default {
     this.recorder.stop()
     // 重置说话时间
     this.num = 60
-    this.time = '按住说话（' + this.num + '秒）'
+    this.form.time = '按住说话（' + this.num + '秒）'
     // 获取语音二进制文件
-    let bold = this.recorder.getBlob()
+    let blob = this.recorder.getBlob()
+    console.log(blob);
     // 将获取的二进制对象转为二进制文件流
-    let files = new File([bold], 'test.mp3', {type: 'audio/mp3', lastModified: Date.now()})
+    let files = new File([blob], 'test.mp3', {type: 'audio/mp3', lastModified: Date.now()})
     let fd = new FormData()
     fd.append('file', files)
-    fd.append('tenantId', 3) // 额外参数，可根据选择填写
     // 这里是通过上传语音文件的接口，获取接口返回的路径作为语音路径
-    this.uploadFile(fd)
+    console.log(fd)
+    // this.uploadFile(fd)
    }
   }
  }
