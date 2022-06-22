@@ -279,7 +279,7 @@ export default {
             let blob = this.recorder.getBlob()
             console.log(blob.arrayBuffer());
             // 将获取的二进制对象转为二进制文件流
-            let file = new File([blob], 'test.wav', {type: 'audio/wav', lastModified: Date.now()})
+            let file = new File([blob], 'test.mp3', {type: 'audio/mp3', lastModified: Date.now()})
             console.log(file)
             this.form.audioUrl = window.URL.createObjectURL(blob);
             let fr = new FileReader();
