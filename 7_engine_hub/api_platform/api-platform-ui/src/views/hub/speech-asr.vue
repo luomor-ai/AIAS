@@ -115,6 +115,7 @@
 <script>
 import { speechAsr } from '@/api/speech'
 import JsonViewer from 'vue-json-viewer'
+import recording from '@/utils/recorder.js'
 
 export default {
   name: 'SpeechAsr',
@@ -133,7 +134,13 @@ export default {
         time: '按住说话(60秒)',
         audioUrl: '',
         result3: ''
-      }
+      },
+      num: 60, // 按住说话时间
+      recorder: null,
+      interval: '',
+      audioFileList: [], // 上传语音列表
+      startTime: '', // 语音开始时间
+      endTime: '', // 语音结束
     }
   },
   methods: {
@@ -222,6 +229,70 @@ export default {
       this.fullscreenLoading = true
       var audio = document.getElementById('audio1')
       this.loadSoundFile(audio.src)
+    },
+    // 清除定时器
+    clearTimer () {
+        if (this.interval) {
+            this.num = 60
+            clearInterval(this.interval)
+        }
+    },
+    // 长按说话
+    mouseStart () {
+        this.clearTimer()
+        this.startTime = new Date().getTime()
+        recording.get((rec) => {
+            // 当首次按下时，要获取浏览器的麦克风权限，所以这时要做一个判断处理
+            if (rec) {
+                // 首次按下，只调用一次
+                if (this.flag) {
+                    this.mouseEnd()
+                    this.flag = false
+                } else {
+                    this.recorder = rec
+                    this.interval = setInterval(() => {
+                        if (this.num <= 0) {
+                            this.recorder.stop()
+                            this.num = 60
+                            this.clearTimer()
+                        } else {
+                            this.num--
+                            this.form.time = '松开结束（' + this.num + '秒）'
+                            this.recorder.start()
+                        }
+                    }, 1000)
+                }
+            }
+        })
+    },
+    // 松开时上传语音
+    mouseEnd () {
+        this.clearTimer()
+        this.endTime = new Date().getTime()
+        if (this.recorder) {
+            this.recorder.stop()
+            // 重置说话时间
+            this.num = 60
+            this.form.time = '按住说话（' + this.num + '秒）'
+            // 获取语音二进制文件
+            let blob = this.recorder.getBlob()
+            console.log(blob.arrayBuffer());
+            // 将获取的二进制对象转为二进制文件流
+            let file = new File([blob], 'test.wav', {type: 'audio/wav', lastModified: Date.now()})
+            console.log(file)
+            this.form.audioUrl = window.URL.createObjectURL(blob);
+            let fr = new FileReader();
+            fr.onloadend = function (e) {
+                let base64 = e.target.result;
+                console.log(base64)
+            };
+            fr.readAsDataURL(blob);
+            let fd = new FormData()
+            fd.append('file', file)
+            // 这里是通过上传语音文件的接口，获取接口返回的路径作为语音路径
+            console.log(fd)
+            // this.uploadFile(fd)
+        }
     }
   }
 }
