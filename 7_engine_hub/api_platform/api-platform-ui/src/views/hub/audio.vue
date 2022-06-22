@@ -83,7 +83,7 @@ export default {
     // 将获取的二进制对象转为二进制文件流
     let file = new File([blob], 'test.wav', {type: 'audio/wav', lastModified: Date.now()})
     console.log(file)
-    this.form.audioUrl = file
+    this.form.audioUrl = window.URL.createObjectURL(blob);
     let fd = new FormData()
     fd.append('file', file)
     // 这里是通过上传语音文件的接口，获取接口返回的路径作为语音路径
