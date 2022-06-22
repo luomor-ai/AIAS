@@ -84,6 +84,12 @@ export default {
     let file = new File([blob], 'test.wav', {type: 'audio/wav', lastModified: Date.now()})
     console.log(file)
     this.form.audioUrl = window.URL.createObjectURL(blob);
+    let fr = new FileReader();
+    fr.onloadend = function (e) {
+      let base64 = e.target.result;
+      console.log(base64)
+    };
+    fr.readAsDataURL(blob);
     let fd = new FormData()
     fd.append('file', file)
     // 这里是通过上传语音文件的接口，获取接口返回的路径作为语音路径
