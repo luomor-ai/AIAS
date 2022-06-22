@@ -78,6 +78,13 @@ axios post json
 
 https://paddlejs.bj.bcebos.com/models/fuse/ocr/ch_PP-OCRv2_det_fuse_activation/chunk_1.dat
 https://paddlejs.bj.bcebos.com/models/fuse/ocr/ch_PP-OCRv2_det_fuse_activation/chunk_2.dat
+
+RNN
+Aishell
+Librispeech
+TIMIT
+
+http://www.aishelltech.com/kysjcp
 ```
 
 ```xml
