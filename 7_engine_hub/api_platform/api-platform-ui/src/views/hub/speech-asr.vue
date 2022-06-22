@@ -164,7 +164,7 @@ export default {
       console.log(file)
       this.form.base64Audio = file.data.base64Audio
       // this.form.result2 = file.results
-      const audio1 = this.form.base64Audio.substring(this.form.base64Audio.indexOf(','))
+      const audio1 = this.form.base64Audio.substring(this.form.base64Audio.indexOf(',') + 1)
       const data = {
         audio: audio1,
         audio_format: "wav",
@@ -267,6 +267,7 @@ export default {
     },
     // 松开时上传语音
     mouseEnd () {
+        let that = this;
         this.clearTimer()
         this.endTime = new Date().getTime()
         if (this.recorder) {
@@ -284,7 +285,19 @@ export default {
             let fr = new FileReader();
             fr.onloadend = function (e) {
                 let base64 = e.target.result;
-                console.log(base64)
+                const audio1 = base64.substring(base64.indexOf(',') + 1)
+                const data = {
+                    audio: audio1,
+                    audio_format: "wav",
+                    sample_rate: 16000,
+                    lang: "zh_cn",
+                    punc: 0,
+                }
+                that.fullscreenLoading = true
+                speechAsr(JSON.stringify(data)).then(response => {
+                    that.fullscreenLoading = false
+                    that.form.result3 = response.result
+                })
             };
             fr.readAsDataURL(blob);
             let fd = new FormData()
