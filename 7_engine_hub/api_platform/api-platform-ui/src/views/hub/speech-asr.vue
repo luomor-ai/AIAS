@@ -288,7 +288,7 @@ export default {
                 const audio1 = base64.substring(base64.indexOf(',') + 1)
                 const data = {
                     audio: audio1,
-                    audio_format: "wav",
+                    audio_format: "mp3",
                     sample_rate: 16000,
                     lang: "zh_cn",
                     punc: 0,
