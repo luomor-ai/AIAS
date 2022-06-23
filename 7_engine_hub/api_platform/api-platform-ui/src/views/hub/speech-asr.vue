@@ -404,6 +404,7 @@ export default {
             let fr = new FileReader();
             fr.onloadend = function (e) {
                 let base64 = e.target.result;
+                console.log(base64);
                 const audio1 = base64.substring(base64.indexOf(',') + 1)
                 const data = {
                     audio: audio1,
