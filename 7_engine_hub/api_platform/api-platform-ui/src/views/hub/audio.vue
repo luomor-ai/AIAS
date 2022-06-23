@@ -128,7 +128,6 @@ export default {
                 , onProcess: function (buffers, powerLevel, duration, sampleRate) {
                     This.duration = duration;
                     This.powerLevel = powerLevel;
-                    This.wave.input(buffers[buffers.length - 1], powerLevel, sampleRate);
                 }
             });
             This.dialogInt = setTimeout(function () {//定时8秒后打开弹窗，用于监测浏览器没有发起权限请求的情况
