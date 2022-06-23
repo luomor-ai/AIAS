@@ -5,8 +5,8 @@
     <el-button type="primary"
         @mousedown.native="mouseStart"
         @mouseup.native="mouseEnd"
-        @touchstart.native="mouseStart"
-        @touchend.native="mouseEnd"
+        v-on:touchstart="mouseStart"
+        v-on:touchend="mouseEnd"
         >{{ form.time }}</el-button>
     <el-divider />
     <span>{{ form.time }}</span>
