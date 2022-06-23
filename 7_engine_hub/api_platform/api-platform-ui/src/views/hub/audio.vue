@@ -28,13 +28,16 @@
 // 引入recorder.js
 import recording from '@/utils/recorder.js'
 import Recorder from 'recorder-core'
+//需要使用到的音频格式编码引擎的js文件统统加载进来，这些引擎文件会比较大
+import 'recorder-core/src/engine/mp3'
+import 'recorder-core/src/engine/mp3-engine'
 
 export default {
     data() {
         return {
             form: {
                 time: '按住说话(60秒)',
-                tip: '点击录制按钮开始说话',
+                tip: '先打开录音，点击录制按钮开始说话',
                 audioUrl: ''
             },
             num: 60, // 按住说话时间
@@ -193,6 +196,13 @@ export default {
                     , duration: duration
                     , rec: rec
                 });
+                This.form.audioUrl = window.URL.createObjectURL(blob);
+                let fr = new FileReader();
+                fr.onloadend = function (e) {
+                    let base64 = e.target.result;
+                    console.log(base64)
+                };
+                fr.readAsDataURL(blob);
             }, function (s) {
                 console.log("录音失败：" + s, 1);
             });
