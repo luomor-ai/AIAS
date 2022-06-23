@@ -9,11 +9,13 @@
             v-on:touchend="mouseEnd"
             >{{ form.time }}</el-button>-->
     <el-button type="primary" @click="recOpen">打开录音,请求权限</el-button>
+    <el-button type="primary" @click="recClose">关闭录音,释放资源</el-button>
     <el-button type="primary" @click="recStart">录制</el-button>
     <el-button type="primary" @click="recStop" style="margin-right:80px">停止</el-button>
     <el-divider />
-    <span>{{ form.time }}</span>
+    <span>{{ form.tip }}</span>
     <el-divider />
+    <div class="ctrlProcessWave"></div>
     <audio
         v-if="form.audioUrl"
         :src="form.audioUrl"
@@ -135,7 +137,6 @@ export default {
             rec.open(function () {
                 console.log("已打开:" + This.type + " " + This.sampleRate + "hz " + This.bitRate + "kbps", 2);
 
-                This.wave = Recorder.WaveView({elem: ".ctrlProcessWave"});
             }, function (msg, isUserNotAllow) {
                 console.log((isUserNotAllow ? "UserNotAllow，" : "") + "打开失败：" + msg, 1);
             });
@@ -148,26 +149,26 @@ export default {
             this.rec = null;
             if (rec) {
                 rec.close();
-                this.reclog("已关闭");
+                console.log("已关闭");
             } else {
-                this.reclog("未打开录音", 1);
+                console.log("未打开录音", 1);
             }
             ;
         },
         recStart: function () {
             if (!this.rec || !Recorder.IsOpen()) {
-                this.reclog("未打开录音", 1);
+                console.log("未打开录音", 1);
                 return;
             }
             this.rec.start();
             var set = this.rec.set;
-            this.reclog("录制中：" + set.type + " " + set.sampleRate + "hz " + set.bitRate + "kbps");
+            console.log("录制中：" + set.type + " " + set.sampleRate + "hz " + set.bitRate + "kbps");
         },
         recPause: function () {
             if (this.rec && Recorder.IsOpen()) {
                 this.rec.pause();
             } else {
-                this.reclog("未打开录音", 1);
+                console.log("未打开录音", 1);
             }
             ;
         },
@@ -175,26 +176,26 @@ export default {
             if (this.rec && Recorder.IsOpen()) {
                 this.rec.resume();
             } else {
-                this.reclog("未打开录音", 1);
+                console.log("未打开录音", 1);
             }
             ;
         },
         recStop: function () {
             if (!(this.rec && Recorder.IsOpen())) {
-                This.reclog("未打开录音", 1);
+                console.log("未打开录音", 1);
                 return;
             }
 
             var This = this;
             var rec = This.rec;
             rec.stop(function (blob, duration) {
-                This.reclog("已录制:", "", {
+                console.log("已录制:", "", {
                     blob: blob
                     , duration: duration
                     , rec: rec
                 });
             }, function (s) {
-                This.reclog("录音失败：" + s, 1);
+                console.log("录音失败：" + s, 1);
             });
         }
     }
