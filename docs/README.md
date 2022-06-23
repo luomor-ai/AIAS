@@ -73,6 +73,11 @@ apt-get install net-tools -y
 sudo docker cp docker/sources.list 76768d8d698b:/etc/apt/sources.list
 ```
 
+```shell
+cnpm install benz-amr-recorder -S
+cnpm install recorder-core -S
+```
+
 ```
 axios post json
 
