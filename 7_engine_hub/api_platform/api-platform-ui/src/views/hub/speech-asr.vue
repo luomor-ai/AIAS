@@ -125,6 +125,8 @@
 import { speechAsr } from '@/api/speech'
 import JsonViewer from 'vue-json-viewer'
 import recording from '@/utils/recorder.js'
+import Recorder from 'recorder-core'
+import 'recorder-core/src/engine/wav'
 
 export default {
   name: 'SpeechAsr',
@@ -152,7 +154,7 @@ export default {
       startTime: '', // 语音开始时间
       endTime: '', // 语音结束
       Rec: Recorder,
-      type: "mp3",
+      type: "wav",
       bitRate: 16,
       sampleRate: 16000,
       rec: 0,

@@ -29,8 +29,7 @@
 import recording from '@/utils/recorder.js'
 import Recorder from 'recorder-core'
 //需要使用到的音频格式编码引擎的js文件统统加载进来，这些引擎文件会比较大
-import 'recorder-core/src/engine/mp3'
-import 'recorder-core/src/engine/mp3-engine'
+import 'recorder-core/src/engine/wav'
 
 export default {
     data() {
@@ -47,7 +46,7 @@ export default {
             startTime: '', // 语音开始时间
             endTime: '', // 语音结束
             Rec: Recorder,
-            type: "mp3",
+            type: "wav",
             bitRate: 16,
             sampleRate: 16000,
             rec: 0,
